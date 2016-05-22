@@ -1,0 +1,37 @@
+CREATE TABLE user(
+	user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+	login TEXT NOT NULL UNIQUE,
+	password TEXT NOT NULL
+);
+CREATE TABLE trip(
+	trip_id INTEGER PRIMARY KEY AUTOINCREMENT,
+	name TEXT NOT NULL UNIQUE,
+	date_start TEXT,
+	date_end TEXT
+);
+CREATE TABLE path(
+	path_id INTEGER PRIMARY KEY AUTOINCREMENT,
+	name TEXT NOT NULL,
+	raw_data TEXT,
+	speed_mean INTEGER,
+	total_time INTEGER,
+	distance INTEGER,
+	speed_str TEXT,
+	time_str TEXT,
+	date TEXT,
+	trip_id INTEGER,
+	FOREIGN KEY(trip_id) REFERENCES trip(trip_id)
+		ON UPDATE RESTRICT
+		ON DELETE CASCADE
+);
+CREATE TABLE user_trip(
+	user_id INTEGER,
+	trip_id INTEGER,
+	PRIMARY KEY(user_id, trip_id),
+	FOREIGN KEY(user_id) REFERENCES user(user_id)
+		ON UPDATE RESTRICT
+		ON DELETE CASCADE,
+	FOREIGN KEY(trip_id) REFERENCES trip(trip_id)
+		ON UPDATE RESTRICT
+		ON DELETE CASCADE
+);

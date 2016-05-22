@@ -1,0 +1,7 @@
+import cgitb; cgitb.enable()
+print("Status: 404")
+print("Location: 'cgi-bin/'")
+print("Content-type: text/html\n")
+print("<html><body>")
+print('''<script>document.location='login.py'</script>''')
+print("</body></html>")
